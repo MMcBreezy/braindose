@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { useDispatch } from "react-redux";
-import { updateCard } from "./actions"; // Import your action
+import { updateCard } from "./actions";
+import './styles.css'
 
 interface FormProps {
     cardId: number;
