@@ -4,7 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "./card";
 import AddCardButton from "./addCardButton";
 import { RootState, AppDispatch } from "../helpers/store";
-import { incrementActiveCard, decrementActiveCard } from "../helpers/cardSlice";
+import {
+  incrementActiveCard,
+  decrementActiveCard,
+  updateCardInformation,
+  updateCardTitle,
+} from "../helpers/cardSlice";
 
 const CardContainer = () => {
   const { cards, activeCardIndex } = useSelector(
@@ -20,6 +25,21 @@ const CardContainer = () => {
     dispatch(decrementActiveCard());
   };
 
+  const handleTitleChange = (newTitle: string) => {
+    dispatch(
+      updateCardTitle({ id: cards[activeCardIndex].id, title: newTitle })
+    );
+  };
+
+  const handleInformationChange = (newInformation: string) => {
+    dispatch(
+      updateCardInformation({
+        id: cards[activeCardIndex].id,
+        information: newInformation,
+      })
+    );
+  };
+
   return (
     <div className="card-container">
       <AddCardButton />
@@ -29,6 +49,8 @@ const CardContainer = () => {
             id={cards[activeCardIndex].id}
             title={cards[activeCardIndex].title}
             information={cards[activeCardIndex].information}
+            onTitleChange={handleTitleChange}
+            onInformationChange={handleInformationChange}
           />
           <div className="card-navigation">
             <button
