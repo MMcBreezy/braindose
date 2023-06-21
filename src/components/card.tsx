@@ -40,6 +40,17 @@ const Card: React.FC<CardProps> = ({
     }
   };
 
+  const calculateFontSize = (text: string) => {
+    let baseSize = 20; // This is your base font size
+    let maxLength = 50; // This is the maximum length of text at which font size will start reducing
+    let minSize = 15;
+
+    if (text.length > maxLength) {
+      return `${Math.max(minSize, baseSize - (text.length - maxLength) * 0.1)}px`;    }
+    return `${baseSize}px`;
+  };
+
+
   return (
     <div className="card">
       <div className="card-content">
@@ -50,12 +61,14 @@ const Card: React.FC<CardProps> = ({
           onChange={(e) => onTitleChange(e.target.value)}
           onClick={handleTitleClick}
           onBlur={handleTitleBlur}
+          style={{ fontSize: calculateFontSize(title) }}
         />
         <textarea
           value={information}
           onChange={(e) => onInformationChange(e.target.value)}
           onClick={handleInformationClick}
           onBlur={handleInformationBlur}
+          style={{ fontSize: calculateFontSize(information) }}
         />
       </div>
     </div>
