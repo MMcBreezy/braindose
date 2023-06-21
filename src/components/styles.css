@@ -20,15 +20,16 @@
   height: calc(100% - 20px); /* adjusted padding */
 }
 
-.card-content h2 {
+.card-content .title {
   margin: 5px;
-  padding: 10px;
-  height: 30px; /* fixed height */
+  padding: 0px 10px;
+  height: 30px;
   background: rgba(255, 255, 255);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 6px;
   color: #000;
+  font-weight: bold;
 }
 
 .card-content textarea {

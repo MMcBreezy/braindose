@@ -44,6 +44,7 @@ const Card: React.FC<CardProps> = ({
     <div className="card">
       <div className="card-content">
         <input
+          className="title"
           type="text"
           value={title}
           onChange={(e) => onTitleChange(e.target.value)}
