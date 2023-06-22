@@ -29,6 +29,7 @@ export const cardSlice = createSlice({
         information: "Enter information here",
       };
       state.cards.push(newCard);
+      state.activeCardIndex = state.cards.length - 1;
     },
     updateCardTitle: (
       state,

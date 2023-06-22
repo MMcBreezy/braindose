@@ -1,9 +1,10 @@
 // CardContainer.tsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "./card";
 import AddCardButton from "./addCardButton";
 import { RootState, AppDispatch } from "../helpers/store";
+import "./styles.css";
 import {
   incrementActiveCard,
   decrementActiveCard,
@@ -16,6 +17,19 @@ const CardContainer = () => {
     (state: RootState) => state.cards
   );
   const dispatch = useDispatch<AppDispatch>();
+
+  // Use a ref to store the previous active card index
+  const prevActiveCardIndexRef = useRef(activeCardIndex);
+  useEffect(() => {
+    prevActiveCardIndexRef.current = activeCardIndex;
+  });
+
+  // Get the previous active card index from the ref
+  const prevActiveCardIndex = prevActiveCardIndexRef.current;
+
+  // Add the "animate" class if the active card index has changed
+  const animationClass =
+    prevActiveCardIndex !== activeCardIndex ? "animate" : "";
 
   const handleNextCard = () => {
     dispatch(incrementActiveCard());
@@ -51,6 +65,7 @@ const CardContainer = () => {
             information={cards[activeCardIndex].information}
             onTitleChange={handleTitleChange}
             onInformationChange={handleInformationChange}
+            className={animationClass}
           />
           <div className="card-navigation">
             <button

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import React from "react";
 import "./styles.css";
 
@@ -7,6 +8,7 @@ interface CardProps {
   information: string;
   onTitleChange: (newTitle: string) => void;
   onInformationChange: (newInformation: string) => void;
+  className?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -15,6 +17,7 @@ const Card: React.FC<CardProps> = ({
   information,
   onTitleChange,
   onInformationChange,
+  className = "",
 }) => {
   const handleTitleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     if (e.currentTarget.value === "Enter title here") {
@@ -46,13 +49,24 @@ const Card: React.FC<CardProps> = ({
     let minSize = 15;
 
     if (text.length > maxLength) {
-      return `${Math.max(minSize, baseSize - (text.length - maxLength) * 0.1)}px`;    }
+      return `${Math.max(
+        minSize,
+        baseSize - (text.length - maxLength) * 0.1
+      )}px`;
+    }
     return `${baseSize}px`;
   };
 
+  const [animationTrigger, setAnimationTrigger] = useState(id);
+
+  useEffect(() => {
+    setAnimationTrigger(id);
+  }, [id]);
+
+  const animationClass = animationTrigger === id ? "animate" : "";
 
   return (
-    <div className="card">
+    <div className={`card ${className} ${animationClass}`}>
       <div className="card-content">
         <input
           className="title"

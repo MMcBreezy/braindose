@@ -11,6 +11,22 @@
   border-radius: 8px;
   opacity: 0.6;
   overflow: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.animate {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.5) translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateX(0);
+    opacity: 0.6;
+  }
 }
 
 .card-content {
